@@ -21,7 +21,7 @@ pipeline {
         
         stage('validate') {
             steps {
-                sh 'terraform validate -no-color'
+                sh "terraform validate -no-color"
             }
         }
 
@@ -30,7 +30,7 @@ pipeline {
                 expression { params.action == 'plan' || params.action == 'apply' }
             }
             steps {
-                sh 'terraform plan -no-color -input=false -out=tfplan --var-file=${ENVIRONMENT}/${ENVIRONMENT}.tfvars'
+                sh "terraform plan -no-color -input=false -out=tfplan --var-file=${ENVIRONMENT}/${ENVIRONMENT}.tfvars"
             }
         }
 
@@ -39,7 +39,7 @@ pipeline {
                 expression { params.action == 'apply'}
             }
             steps {
-                sh 'terraform show -no-color tfplan > tfplan.txt'
+                sh "terraform show -no-color tfplan > tfplan.txt"
                 script {
                     def plan = readFile 'tfplan.txt'
                     input message: "Apply the plan?",
@@ -62,8 +62,8 @@ pipeline {
                 expression {params.action == 'destroy'}
             }
             steps {
-                sh 'terraform plan -no-color -destroy -out=tfplan  --var-file=${ENVIRONMENT}/${ENVIRONMENT}.tfvars'
-                sh 'terraform show -no-color tfplan > tfplan.txt'
+                sh "terraform plan -no-color -destroy -out=tfplan  --var-file=${ENVIRONMENT}/${ENVIRONMENT}.tfvars"
+                sh "terraform show -no-color tfplan > tfplan.txt"
             }
         }
 
@@ -77,7 +77,7 @@ pipeline {
                     input message: "Delete the stack?",
                     parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
                 }
-                sh 'terraform destroy -no-color --auto-approve -input=false --var-file=${ENVIRONMENT}/${ENVIRONMENT}.tfvars'
+                sh "terraform destroy -no-color --auto-approve -input=false --var-file=${ENVIRONMENT}/${ENVIRONMENT}.tfvars"
             }
         }
     }
