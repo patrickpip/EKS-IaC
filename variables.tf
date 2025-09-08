@@ -72,7 +72,7 @@ variable "cluster_name" {
 variable "eks_cluster_role_name" {
     description = "The name of the IAM role for the EKS cluster"
     type        = string
-    default     = "lic-eks-cluster-role"
+    default     = "loso-eks-cluster-role"
 }
 
 variable "endpoint_private_access" {
