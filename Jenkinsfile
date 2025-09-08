@@ -3,7 +3,7 @@ pipeline {
     parameters {
         choice(
             choices ['plan', 'apply', 'destroy'],
-            description 'Choose the Terraform action to perform',
+            description: 'Choose the Terraform action to perform',
             name: 'action')
         choice(
             choices ['dev', 'prod'],
