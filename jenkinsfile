@@ -4,12 +4,10 @@ pipeline {
         choice(
             choices ['plan', 'apply', 'destroy'],
             description 'Choose the Terraform action to perform',
-            defaultValue 'plan',
             name: 'action')
         choice(
             choices ['dev', 'prod'],
             description 'deployment environment',
-            defaultValue 'dev',
             name: 'ENVIRONMENT')
     }
     stages {
