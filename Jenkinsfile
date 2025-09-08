@@ -7,7 +7,7 @@ pipeline {
             name: 'action')
         choice(
             choices ['dev', 'prod'],
-            description 'deployment environment',
+            description: 'deployment environment',
             name: 'ENVIRONMENT')
     }
     stages {
